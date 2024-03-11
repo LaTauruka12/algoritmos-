@@ -1,0 +1,63 @@
+#include <iostream>
+#include <stack>
+#include <vector>
+
+using namespace std;
+
+class Almacen {
+private:
+    stack<int> contenedores;
+
+public:
+    // Método para apilar un contenedor en el almacén
+    void Push(int contenedor) {
+        contenedores.push(contenedor);
+    }
+
+    // Método para retirar un contenedor específico del almacén
+    bool Pop(int contenedor) {
+        stack<int> temp;
+        bool encontrado = false;
+
+        // Buscar el contenedor y mover los contenedores superiores a una pila temporal
+        while (!contenedores.empty()) {
+            if (contenedores.top() == contenedor) {
+                encontrado = true;
+                contenedores.pop();
+                break;
+            } else {
+                temp.push(contenedores.top());
+                contenedores.pop();
+            }
+        }
+
+        // Mover los contenedores de la pila temporal de regreso a la pila original
+        while (!temp.empty()) {
+            contenedores.push(temp.top());
+            temp.pop();
+        }
+
+        return encontrado;
+    }
+};
+
+int main() {
+    Almacen almacen;
+
+    // Apilar algunos contenedores
+    almacen.Push(1);
+    almacen.Push(2);
+    almacen.Push(3);
+    almacen.Push(4);
+    almacen.Push(5);
+
+    // Retirar el contenedor con el número de identificación 3
+    int contenedor_a_retirar = 3;
+    if (almacen.Pop(contenedor_a_retirar)) {
+        cout << "Se retiró el contenedor " << contenedor_a_retirar << " del almacén." << endl;
+    } else {
+        cout << "El contenedor " << contenedor_a_retirar << " no fue encontrado en el almacén." << endl;
+    }
+
+    return 0;
+}
