@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct Expediente {
+    string fecha;
+    int numero;
+    string caratula;
+};
+{
+    if (exp1.fecha != exp2.fecha) {
+        return exp1.fecha < exp2.fecha;
+    }
+    return exp1.numero < exp2.numero;
+}
+
+int main() {
+    // Vector de expedientes
+    vector<Expediente> expedientes = {
+        {"2024-03-11", 102, "Caratula 1"},
+        {"2024-03-11", 101, "Caratula 2"},
+        {"2024-03-10", 201, "Caratula 3"},
+        {"2024-03-10", 202, "Caratula 4"},
+        {"2024-03-12", 301, "Caratula 5"}
+    };
+
+    // Ordenar los expedientes
+    sort(expedientes.begin(), expedientes.end(), compararExpedientes);
+
+    // Mostrar los expedientes ordenados
+    cout << "Expedientes ordenados por fecha y número:" << endl;
+    for (const auto &expediente : expedientes) {
+        cout << "Fecha: " << expediente.fecha << ", Nro de expediente: " << expediente.numero << ", Caratula: " << expediente.caratula << endl;
+    }
+
+    return 0;
+}
