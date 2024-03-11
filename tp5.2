@@ -1,0 +1,39 @@
+
+#include <stack>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+void mostrarCamino(const vector<string>& pueblos) {
+    stack<string> pila;
+
+    // Mostrar el camino de ida y guardar los pueblos en la pila
+    cout << "Camino de ida:" << endl;
+    for (const auto& pueblo : pueblos) {
+        cout << pueblo << " -> ";
+        pila.push(pueblo);
+    }
+    cout << endl;
+
+    // Mostrar el camino de vuelta utilizando los pueblos de la pila
+    cout << "Camino de vuelta:" << endl;
+    while (!pila.empty()) {
+        cout << pila.top();
+        pila.pop();
+        if (!pila.empty()) {
+            cout << " -> ";
+        }
+    }
+    cout << endl;
+}
+
+int main() {
+    // Ejemplo de nombres de pueblos
+    vector<string> pueblos = {"Pueblo A", "Pueblo B", "Pueblo C", "Pueblo D"};
+
+    // Mostrar el camino de ida y vuelta
+    mostrarCamino(pueblos);
+
+    return 0;
+}
